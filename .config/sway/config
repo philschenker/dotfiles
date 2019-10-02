@@ -21,7 +21,7 @@ set $right l
 set $term termite
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu j4-dmenu-desktop --dmenu='bemenu -i' --term='termite'
+set $menu wofi --show=run
 
 ### Output configuration
 #
@@ -34,15 +34,17 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+output eDP-1 scale 2
+
 ### Idle configuration
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 222222' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -87,6 +89,9 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    # Lock computer
+    bindsym $mod+Ctrl+L exec swaylock -f -c 222222
 #
 # Moving around:
 #

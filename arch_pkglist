@@ -1,4 +1,3 @@
-bemenu
-j4-demenu-desktop
 sway
-termite
+termite-nocsd
+wofi
