@@ -205,6 +205,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Volume setting.
+bindsym XF86AudioMute exec pulseaudio-ctl mute on; exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec pulseaudio-ctl down 5; exec pkill -SIGRTMIN+10 i3blocks
+bindsym Shift+XF86AudioLowerVolume exec pulseaudio-ctl down 1; exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up 5; exec pkill -SIGRTMIN+10 i3blocks
+bindsym Shift+XF86AudioRaiseVolume exec pulseaudio-ctl up 1; exec pkill -SIGRTMIN+10 i3blocks
+
+# Playback setting.
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 #
 # Status Bar:
 #
@@ -222,5 +235,12 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+#
+# Autostart:
+#
+#
+exec pulseaudio &
+exec dunst &
 
 include /etc/sway/config.d/*
