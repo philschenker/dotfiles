@@ -22,11 +22,12 @@ set $term termite
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu wofi --show=run
+set $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $wallpaper fill
 #
 # Example configuration:
 #
@@ -34,14 +35,14 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-output eDP-1 scale 2
+# output eDP-1 disable 
 
 ### Idle configuration
 #
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 222222' \
+         timeout 300 'swaylock -f -c 222222 -i $wallpaper' \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
@@ -91,7 +92,7 @@ exec swayidle -w \
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Lock computer
-    bindsym $mod+Ctrl+L exec swaylock -f -c 222222 -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
+    bindsym $mod+Ctrl+L exec swaylock -f -c 222222 -i $wallpaper
 #
 # Moving around:
 #
@@ -116,6 +117,14 @@ exec swayidle -w \
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+#
+# Floating windows
+#
+for_window [app_id="pamac-manager"] floating enable
+for_window [class="Hamster"] floating enable
+for_window [class="gnome-control-center"] floating enable
+
 #
 # Workspaces:
 #
@@ -158,8 +167,9 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 #
 # Workspace assignments:
 #
-assign [titlec="Spotify Premium"] $workspace10
+assign [instance="spotify"] $workspace10
 assign [app_id="evolution"] $workspace9
+assign [class="Slack"] $workspace9
 
 
 #
@@ -246,7 +256,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command while date +'%d.%m.%Y %k:%M:%S'; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -261,7 +271,8 @@ bar {
 #
 exec pulseaudio &
 exec dunst &
-exec spotify &
+#exec spotify &
 exec evolution &
+exec slack &
 
 include /etc/sway/config.d/*
