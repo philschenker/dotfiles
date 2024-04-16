@@ -1,0 +1,75 @@
+[user]
+	email = philippe.schenker@impulsing.ch
+	name = Philippe Schenker
+[color]
+	ui = auto
+[core]
+	editor = vim
+	abbrev = 12
+#	whitespace = indent-with-non-tab
+[merge]
+	tool = kdiff3
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = mail.infomaniak.ch
+	smtpUser = dev@pschenker.ch
+	smtpServerPort = 587
+	from = Philippe Schenker <dev@pschenker.ch>
+[credential]
+	helper = store
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = cache
+[alias]
+	a	= add
+	aa	= add -A
+	ap	= add -p
+	sa	= stage -A
+	b	= branch
+	c	= commit
+	ca	= commit --amend
+	can	= commit --amend --no-edit
+	cp	= cherry-pick
+	cpc	= cherry-pick --continue
+	cps	= cherry-pick --skip
+	cpa	= cherry-pick --abort
+	cpx	= cherry-pick -x
+	d	= diff
+	dc	= diff --cached
+	f	= fetch
+	fp	= format-patch
+	g	= grep
+	l	= log
+	lp	= log -p
+	lf	= log --pretty=fuller
+	lfp	= log -p --pretty=fuller --full-diff 
+	lo	= log --pretty=oneline --abbrev-commit
+	lo2	= log --date=short --pretty=format:'%C(auto)%h %Cgreen%ad %Cred%<(15,trunc)%aN %C(auto)%<(62,trunc)%s %d'
+	lo3	= log --date=short --pretty=format:'%C(auto)%h %Cgreen%ad %Cgreen%cd %Cred%<(15,trunc)%aN %C(auto)%s %d'
+	lo4	= log --date=short --pretty=format:'%Cred%<(15,trunc)%aN %C(auto)%s %d'
+	lol	= log --pretty=oneline --abbrev-commit --graph --decorate --all
+	m	= merge
+	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	o	= checkout
+	p	= pull
+	r	= rebase
+	rc	= rebase --continue
+	s	= status
+	w	= whatchanged
+[http]
+	sslverify = true
+[pull]
+	ff = only
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[pretty]
+        fixes = Fixes: %h (\"%s\")
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[commit]
+	gpgsign = true
+[format]
+	signOff = true
